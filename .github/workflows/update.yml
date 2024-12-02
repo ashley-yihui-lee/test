@@ -35,6 +35,9 @@ jobs:
       run: |
         git add -f taiwan-us-trade.csv
         git status  # Check which files are staged for commit
+        
+    - name: List directory contents
+      run: ls -l
 
     - name: Commit and push any changes
       run: |-
