@@ -21,22 +21,25 @@ jobs:
         python-version: '3.10'
 
     - name: Install necessary packages
-      run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib openpyxl xlrd urljoin
+      run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib openpyxl xlrd
 
     - name: Scrape data and run notebook
-      run: jupyter nbconvert --to notebook --execute "test.ipynb" --stdout
+      run: jupyter nbconvert --to notebook --execute "taiwan-us-trade.ipynb" --stdout
 
-    - name: Check if CSV is generated
-      run: ls -l  # List files to verify CSV creation
+    - name: Check current directory and files
+      run: |
+        echo "Current directory: $(pwd)"
+        ls -l  # List files to verify if the CSV is in the right place
 
-    - name: Check git status
-      run: git status  # Check if CSV is tracked
+    - name: Check git status after adding CSV
+      run: |
+        git add -f taiwan-us-trade.csv
+        git status  # Check which files are staged for commit
 
     - name: Commit and push any changes
       run: |-
         git config user.name "Automated"
         git config user.email "actions@users.noreply.github.com"
-        git add -f taiwan-us-trade.csv  # Force-add the CSV file
-        timestamp=$(date -u)
-        git commit -m "Latest data: ${timestamp}" || exit 0
-        git push
+        git add -f taiwan-us-trade.csv  # Force add the CSV file
+        git commit -m "Latest data: $(date -u)" || exit 0
+        git push --verbose  # More verbose push to check for errors
