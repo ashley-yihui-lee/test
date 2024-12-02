@@ -24,7 +24,7 @@ jobs:
       run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib openpyxl xlrd
 
     - name: Scrape data and run notebook
-      run: jupyter nbconvert --to notebook --execute "taiwan-us-trade.ipynb" --stdout
+      run: jupyter nbconvert --to notebook --execute "test.ipynb" --stdout
 
     - name: Check if CSV is generated
       run: ls -l  # List files to verify CSV creation
