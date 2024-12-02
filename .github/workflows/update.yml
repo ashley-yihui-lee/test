@@ -21,7 +21,7 @@ jobs:
         python-version: '3.10'
 
     - name: Install necessary packages
-      run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib openpyxl xlrd urljoin os
+      run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib openpyxl xlrd urljoin
 
     - name: Scrape data and run notebook
       run: jupyter nbconvert --to notebook --execute "test.ipynb" --stdout
