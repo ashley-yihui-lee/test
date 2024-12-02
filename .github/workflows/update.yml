@@ -26,9 +26,9 @@ jobs:
       with:
         python-version: '3.10'
     - name: Install all necessary packages
-      run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib
+      run: pip install jupyter lxml pandas requests beautifulsoup4 html5lib openpyxl xlrd
     - name: Scraping today's data
-      run: jupyter nbconvert --to notebook --execute "taiwan-us-trade.ipynb" --stdout
+      run: jupyter nbconvert --to notebook --execute "taiwan-us-trade.ipynb" --inplace
     - name: Commit and push any changes
       run: |-
         git config user.name "Automated"
