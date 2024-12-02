@@ -4,12 +4,12 @@ permissions:
   contents: write
 
 on:
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 1 * *'  # Runs on the 1st of every month
+    - cron: '0 0 1 * *'
 
 jobs:
-  daily:  # Even though it's daily, it's running monthly based on the cron
+  daily:
     runs-on: ubuntu-latest
     steps:
     - name: Check out this repo
@@ -25,6 +25,9 @@ jobs:
 
     - name: Scrape data and run notebook
       run: jupyter nbconvert --to notebook --execute "taiwan-us-trade.ipynb" --stdout
+
+    - name: Check if CSV is generated
+      run: ls -l  # List files to verify CSV creation
 
     - name: Commit and push any changes
       run: |-
